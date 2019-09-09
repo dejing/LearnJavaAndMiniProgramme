@@ -1,0 +1,25 @@
+<!--index.wxml-->
+<view class="container"> 
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+ 
+  <view class='form-list'>
+    <text>点击扫描二维码</text>
+    <text>{{firstUndefined}} \n</text>
+    <text>{{Invoicetype}}\n</text>
+    <text>{{InvoiceCode}}\n</text>
+    <text>{{InvoiceNumber}}\n</text>
+    <text>{{Amount}}\n</text>
+    <text>{{DateIssued}}\n</text>
+    <text>{{InvoiceVerifyCode}}\n</text>
+    <image class='scan' bindtap='scanCode' src='/images/scanCode.png' mode="center"></image>
+  </view>
+</view>
