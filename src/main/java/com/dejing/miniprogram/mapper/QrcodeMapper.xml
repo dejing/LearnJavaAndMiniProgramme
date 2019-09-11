@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dejing.miniprogram.mapper.QrcodeMapper">
+  <resultMap id="BaseResultMap" type="com.dejing.miniprogram.generator.Qrcode">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="firstUnknown" jdbcType="VARCHAR" property="firstunknown" />
+    <result column="Invoicetype" jdbcType="VARCHAR" property="invoicetype" />
+    <result column="InvoiceCode" jdbcType="VARCHAR" property="invoicecode" />
+    <result column="InvoiceNumber" jdbcType="VARCHAR" property="invoicenumber" />
+    <result column="Amount" jdbcType="REAL" property="amount" />
+    <result column="DateIssued" jdbcType="VARCHAR" property="dateissued" />
+    <result column="InvoiceVerifyCode" jdbcType="VARCHAR" property="invoiceverifycode" />
+    <result column="LastUnknown" jdbcType="VARCHAR" property="lastunknown" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, firstUnknown, Invoicetype, InvoiceCode, InvoiceNumber, Amount, DateIssued, InvoiceVerifyCode, 
+    LastUnknown
+  </sql>
+  <select id="selectByExample" parameterType="com.dejing.miniprogram.generator.QrcodeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from qrcode
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from qrcode
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from qrcode
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dejing.miniprogram.generator.QrcodeExample">
+    delete from qrcode
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.dejing.miniprogram.generator.Qrcode" useGeneratedKeys="true" >
+    insert into qrcode (firstUnknown, Invoicetype, InvoiceCode, 
+      InvoiceNumber, Amount, DateIssued, 
+      InvoiceVerifyCode, LastUnknown)
+    values (#{firstunknown,jdbcType=VARCHAR}, #{invoicetype,jdbcType=VARCHAR}, #{invoicecode,jdbcType=VARCHAR}, 
+      #{invoicenumber,jdbcType=VARCHAR}, #{amount,jdbcType=REAL}, #{dateissued,jdbcType=VARCHAR}, 
+      #{invoiceverifycode,jdbcType=VARCHAR}, #{lastunknown,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.dejing.miniprogram.generator.Qrcode" useGeneratedKeys="true">
+    insert into qrcode
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="firstunknown != null">
+        firstUnknown,
+      </if>
+      <if test="invoicetype != null">
+        Invoicetype,
+      </if>
+      <if test="invoicecode != null">
+        InvoiceCode,
+      </if>
+      <if test="invoicenumber != null">
+        InvoiceNumber,
+      </if>
+      <if test="amount != null">
+        Amount,
+      </if>
+      <if test="dateissued != null">
+        DateIssued,
+      </if>
+      <if test="invoiceverifycode != null">
+        InvoiceVerifyCode,
+      </if>
+      <if test="lastunknown != null">
+        LastUnknown,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="firstunknown != null">
+        #{firstunknown,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicetype != null">
+        #{invoicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicecode != null">
+        #{invoicecode,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicenumber != null">
+        #{invoicenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=REAL},
+      </if>
+      <if test="dateissued != null">
+        #{dateissued,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceverifycode != null">
+        #{invoiceverifycode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastunknown != null">
+        #{lastunknown,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dejing.miniprogram.generator.QrcodeExample" resultType="java.lang.Long">
+    select count(*) from qrcode
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update qrcode
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.firstunknown != null">
+        firstUnknown = #{record.firstunknown,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoicetype != null">
+        Invoicetype = #{record.invoicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoicecode != null">
+        InvoiceCode = #{record.invoicecode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoicenumber != null">
+        InvoiceNumber = #{record.invoicenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null">
+        Amount = #{record.amount,jdbcType=REAL},
+      </if>
+      <if test="record.dateissued != null">
+        DateIssued = #{record.dateissued,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoiceverifycode != null">
+        InvoiceVerifyCode = #{record.invoiceverifycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastunknown != null">
+        LastUnknown = #{record.lastunknown,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update qrcode
+    set id = #{record.id,jdbcType=BIGINT},
+      firstUnknown = #{record.firstunknown,jdbcType=VARCHAR},
+      Invoicetype = #{record.invoicetype,jdbcType=VARCHAR},
+      InvoiceCode = #{record.invoicecode,jdbcType=VARCHAR},
+      InvoiceNumber = #{record.invoicenumber,jdbcType=VARCHAR},
+      Amount = #{record.amount,jdbcType=REAL},
+      DateIssued = #{record.dateissued,jdbcType=VARCHAR},
+      InvoiceVerifyCode = #{record.invoiceverifycode,jdbcType=VARCHAR},
+      LastUnknown = #{record.lastunknown,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dejing.miniprogram.generator.Qrcode">
+    update qrcode
+    <set>
+      <if test="firstunknown != null">
+        firstUnknown = #{firstunknown,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicetype != null">
+        Invoicetype = #{invoicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicecode != null">
+        InvoiceCode = #{invoicecode,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicenumber != null">
+        InvoiceNumber = #{invoicenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        Amount = #{amount,jdbcType=REAL},
+      </if>
+      <if test="dateissued != null">
+        DateIssued = #{dateissued,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceverifycode != null">
+        InvoiceVerifyCode = #{invoiceverifycode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastunknown != null">
+        LastUnknown = #{lastunknown,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dejing.miniprogram.generator.Qrcode">
+    update qrcode
+    set firstUnknown = #{firstunknown,jdbcType=VARCHAR},
+      Invoicetype = #{invoicetype,jdbcType=VARCHAR},
+      InvoiceCode = #{invoicecode,jdbcType=VARCHAR},
+      InvoiceNumber = #{invoicenumber,jdbcType=VARCHAR},
+      Amount = #{amount,jdbcType=REAL},
+      DateIssued = #{dateissued,jdbcType=VARCHAR},
+      InvoiceVerifyCode = #{invoiceverifycode,jdbcType=VARCHAR},
+      LastUnknown = #{lastunknown,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
