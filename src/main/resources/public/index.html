@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<script src="/webjars/jquery/jquery.min.js"></script>
-    首页
+<!--<p id="Show_p">{ "name": "Brett", "address":"北京路23号", "email": "123456@qq.com" }</p>-->
+<p th:text="'Hello, ' + ${name} + '!'" />
+<pre id="out_pre"></pre>
+<!--<script src="/webjars/jquery/jquery.min.js"></script>-->
+
+${data['data']}
+
 </body>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log(1111);
+        $.getJSON('/wx/index', function (data) {
+            console.log(22222)
+            console.log(data['data'])
+            console.log(data['msg'])
+            console.log(data['ok'])
+            console.log(data['status'])
+
+            // var json = JSON.parse(data.toString())
+            console.log(data);
+
+        })
+    })
+</script>　　
+
+
 </html>

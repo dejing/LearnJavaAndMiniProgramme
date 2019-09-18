@@ -8,13 +8,17 @@ import com.dejing.miniprogram.mapper.QrcodeMapper;
 import com.dejing.miniprogram.mapper.UserMapper;
 import com.dejing.miniprogram.utils.GlobalResult;
 import com.dejing.miniprogram.utils.WechatUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @RestController
 public class UserController {
 
@@ -37,6 +41,7 @@ public class UserController {
       GlobalResult result = GlobalResult.build(500, "Code is null", null);
       return result;
     }
+
 
     // 用户非敏感信息：rawData
     // 签名：signature
@@ -99,6 +104,16 @@ public class UserController {
     String skey = UUID.randomUUID().toString();
     GlobalResult result = GlobalResult.build(200, skey, skey);
     return result;
+  }
+
+  @GetMapping("wx/getAll")
+  public List<User> getAll() {
+
+    log.info("get All user info");
+    return userMapper.selectByExample(null);
+//    String skey = UUID.randomUUID().toString();
+//    GlobalResult result = GlobalResult.build(200, skey, skey);
+//    return result;
   }
 
   @PostMapping("wx/QRData")
