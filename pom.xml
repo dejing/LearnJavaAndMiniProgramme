@@ -105,10 +105,6 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
-
-
-
-
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
@@ -132,6 +128,11 @@
 
             <version>2.2.2</version>
 
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>5.1.9.RELEASE</version>
         </dependency>
 
 

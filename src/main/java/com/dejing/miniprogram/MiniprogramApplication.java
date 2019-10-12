@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 
 //启动类启用定时任务
-@EnableScheduling
+//@EnableScheduling
 public class MiniprogramApplication {
 
     public static void main(String[] args) {
