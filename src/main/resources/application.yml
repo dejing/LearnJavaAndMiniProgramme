@@ -8,14 +8,34 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/wxlogin?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true&useSSL=false
     username: root
     password: root
+  ## Redis 配置
+  redis:
+    ## Redis数据库索引（默认为0）
+    database: 0
+    ## Redis服务器地址
+    host: 192.168.23.74
+    ## Redis服务器连接端口
+    port: 6379
+    ## Redis服务器连接密码（默认为空）
+    password:
+    ## 连接超时时间（毫秒）
+    timeout: 1200
+    ## 连接池最大阻塞等待时间（使用负值表示没有限制）
+    ## 连接池中的最大空闲连接
+    ## 连接池中的最小空闲连接
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-wait: -1
 
 mysql:
   datasource:
     #读库数目
-#    num: 1
-#    type-aliases-package: com.example.dxfl.dao
-#    mapper-locations: classpath:/mapper/*.xml
-#    config-location: classpath:/mybatis-config.xml
+    #    num: 1
+    #    type-aliases-package: com.example.dxfl.dao
+    #    mapper-locations: classpath:/mapper/*.xml
+    #    config-location: classpath:/mybatis-config.xml
     write:
       jdbc-url: jdbc:mysql://192.168.23.74:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=true
       username: root
@@ -33,6 +53,14 @@ mysql:
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case=true:
+
+#打印sql时的语句 ========================
+logging:
+  file: d:/logs/bsbdj.log
+  level:
+    com:
+      acong:
+        dao: debug
 
 
 #for Test Read configuration

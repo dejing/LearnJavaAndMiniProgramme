@@ -8,10 +8,14 @@ import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.data.redis.core.script.DefaultScriptExecutor;
+import org.springframework.data.redis.core.script.RedisScript;
+import org.springframework.data.redis.core.script.ScriptExecutor;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @MapperScan(basePackages = {"com.dejing.miniprogram.mapper.article", "com.dejing.miniprogram.mapper"})
@@ -21,7 +25,8 @@ public class DatasourceDemoApplicationTests {
 
   @Autowired
   private MemberServiceImpl memberService;
-
+  @Autowired
+  private RedisTemplate redisTemplate;
   @Test
   public void testWrite() {
     Article article = new Article();
@@ -55,7 +60,28 @@ public class DatasourceDemoApplicationTests {
 
     memberService.save(article);
   }
-//
+
+
+  @Test
+  public void testLua(){
+//    String script =
+//            "local t1 = redis.call('get', KEYS[1]);" + "\n"
+//                    + "if type(t1) == 'table' then" + "\n"
+//                    + "return t1;" + "\n"
+//                    + "end;" + "\n";
+    String script =
+            "local t1 = redis.call('get', KEYS[1]);" + "\n"
+                    + "return t1;" + "\n";
+    DefaultRedisScript<List>  rs = new DefaultRedisScript<List>(script, List.class);
+    ///ScriptExecutor scriptExecutor = new DefaultScriptExecutor(redisTemplate);
+    List<String>keys=new ArrayList<>();
+    keys.add("article_25");
+    Map<String, Object> args =new HashMap<String, Object>();
+
+    List ret = (List) redisTemplate.execute(rs, keys);    //scriptExecutor.execute(rs,keys, args);
+    System.out.println(ret);
+  }
+  //
 //  @Test
 //  public void testReadFromMaster() {
 //    memberService.getToken("1234");
