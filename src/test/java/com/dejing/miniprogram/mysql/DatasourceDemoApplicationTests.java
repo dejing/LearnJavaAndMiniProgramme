@@ -10,9 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
-import org.springframework.data.redis.core.script.DefaultScriptExecutor;
-import org.springframework.data.redis.core.script.RedisScript;
-import org.springframework.data.redis.core.script.ScriptExecutor;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
