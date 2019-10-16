@@ -1,6 +1,5 @@
 package com.dejing.miniprogram.config;
 
-import com.dejing.miniprogram.model.EchoServerTask;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -29,7 +28,7 @@ public class TaskSchedulerConfig implements SchedulingConfigurer {
         taskRegistrar.setScheduler(taskScheduler());
     }
 
-    @Bean(destroyMethod = "shutdown")
+    @Bean
     Executor taskScheduler() {
          return (Executor) Executors.newScheduledThreadPool(100).
                  scheduleAtFixedRate(new myTask(), 5000, 5000, TimeUnit.MILLISECONDS);
