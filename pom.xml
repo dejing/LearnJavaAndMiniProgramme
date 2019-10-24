@@ -143,6 +143,13 @@
         </dependency>
 
 
+        <!-- RocketMQ -->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
 
     </dependencies>
 

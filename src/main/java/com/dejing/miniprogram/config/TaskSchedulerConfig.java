@@ -11,27 +11,27 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-@Configuration
-@EnableScheduling
+//@Configuration
+//@EnableScheduling
 public class TaskSchedulerConfig implements SchedulingConfigurer {
 
-    public class myTask extends TimerTask {
+  public class myTask extends TimerTask {
 
     @Override
     public void run() {
       System.out.println("The current time is " + System.currentTimeMillis() + ".");
-            }
     }
+  }
 
-    @Override
-    public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
-        taskRegistrar.setScheduler(taskScheduler());
-    }
+  @Override
+  public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
+    taskRegistrar.setScheduler(taskScheduler());
+  }
 
-    @Bean
-    Executor taskScheduler() {
-         return (Executor) Executors.newScheduledThreadPool(100).
-                 scheduleAtFixedRate(new myTask(), 5000, 5000, TimeUnit.MILLISECONDS);
-    }
-
+  @Bean
+  Executor taskScheduler() {
+    return (Executor)
+        Executors.newScheduledThreadPool(100)
+            .scheduleAtFixedRate(new myTask(), 5000, 5000, TimeUnit.MILLISECONDS);
+  }
 }
